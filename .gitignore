@@ -1,0 +1,4 @@
+dataIn/*
+!dataIn/.gitkeep
+
+.idea/*
