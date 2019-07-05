@@ -1,7 +1,6 @@
 import tensorflow as tf
 import numpy as np
 import nltk
-import imdb
 import time
 
 import os
@@ -86,3 +85,13 @@ def train(dataset, keras_model, lr=learning_rate, batch_size=batch_size, epochs=
         keras_model.fit(dataset.make_one_shot_iterator(),
                         epochs=epochs,
                         batch_size=batch_size)
+    keras_model.save("model.h5")
+    
+
+def evaluate(test_dataset, saved_model_path, metrics, verbose=0):
+    print('loading model...')
+    saved_model = tf.keras.models.load_model(saved_model_path, verbose=verbose)
+    print('calculating loss...')
+    loss = saved_model.evalaute(test_dataset, metrics=metrics)
+    print("loss is {}".format(loss))
+
